@@ -266,13 +266,13 @@ proxyMock.On("passthrough", mock.AnythingOfType("context.Context"), mock.Anythin
 
 ```go
 type Proxy interface {
-  passthrough(ctx context.Context, s string) (string, error)
+  Passthrough(ctx context.Context, s string) (string, error)
 }
 ```
 
 ```go
 proxyMock := mocks.NewProxy(t)
-proxyMock.On("passthrough", mock.AnythingOfType("context.Context"), mock.AnythingOfType("string")).
+proxyMock.On("Passthrough", mock.AnythingOfType("context.Context"), mock.AnythingOfType("string")).
 	Return(
 		func(ctx context.Context, s string) string {
 			return s
@@ -286,7 +286,7 @@ proxyMock.On("passthrough", mock.AnythingOfType("context.Context"), mock.Anythin
 Note that the following is incorrect (you can't return all the return values with one function):
 ```go
 proxyMock := mocks.NewProxy(t)
-proxyMock.On("passthrough", mock.AnythingOfType("context.Context"), mock.AnythingOfType("string")).
+proxyMock.On("Passthrough", mock.AnythingOfType("context.Context"), mock.AnythingOfType("string")).
 	Return(func(ctx context.Context, s string) (string, error) {
 		return s, nil
 	})
